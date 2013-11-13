@@ -7,6 +7,7 @@
 <script src="js/jquery.jeditable.time.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.jeditable.ajaxupload.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.jeditable.checkbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function() {
      $('.edit').editable('save.php', {
@@ -74,12 +75,27 @@
     updateTime();
     //-->
 </script>
-
 </head>
 <body>
  <div style="font-size:350%;font-family: sans-serif;color:rgb(0,0,228);height:500px"/>
 	<h1><span id="time" style="position:relative;"/></h1>
 </div>
+<p id="audio">
+ <a href="bell.mp3">Listen &raquo;</a>
+</p>
+ <script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var audioElement = $('#audio'),
+        href = audioElement.children('a').attr('href');
+        $.template('audioTemplate', '<audio src="${src}" controls>');
+        if (Modernizr.audio.mp3) {
+            audioElement.empty();
+                $.tmpl('audioTemplate', {src: href}).appendTo(audioElement);
+             }
+        });
+</script>
+
 <?php
 	include("func.php");
 	$schedules=simplexml_load_file('bells.xml');
