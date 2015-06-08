@@ -48,9 +48,9 @@
                 $selection = $schedule;
              }
            }
-           
+
            return $selection;
-    } 
+    }
 
    function findPeriod($schedule,$key){
        $selection = null;
@@ -61,7 +61,7 @@
 	  }
 	}
 	}
-	
+
 	return $selection;
    }
 
@@ -84,7 +84,7 @@
 
                 print(":");
                 print("<select name=\"startmin\">");
-                
+
                 for($i=0;$i<60;$i++){
                         if($i<10)$i="0".$i;
                         if($i==$smin) $selected = "selected";
@@ -105,10 +105,84 @@
 		   if(strcmp($testdow,$thisDOW)==0) $checked="green";
 	   }
 
-	print("<div style=\"float:left;color:$checked\" class=\"cbox\" id=\"$id.dow.$thisDOW\">".$thisDOW."&nbsp; </div>");
+	print("<div style=\"float:left;color:$checked\" class=\"cbox\" id=\"$id.DOW.$thisDOW\">".$thisDOW."&nbsp; </div>");
 	$checked="rgb(220,220,220);";
 	}
 
-   }
-?>
+  }
+// -----------------get periods from database--------------
+  function get_periods($id){
+      $db = new SQLite3('bell.db');
+      $data=null;
+      $results = $db->query('SELECT * FROM PERIODS where ID ='.$id);
+      while ($results = $results->fetchArray()) {
+        return $data=$results;
+      }
+  }
+  function get_all_periods($sid){
+      $db = new SQLite3('bell.db');
+   	  return $results = $db->query('SELECT * FROM PERIODS where SCHEDULE_ID='.$sid);
+  }
+  //-----------get only schedule that have ID = $sid---------------
+  function get_schedule($sid){
+      $db = new SQLite3('bell.db');
+      $data=null;
+      $results = $db->query('SELECT * FROM SCHEDULE where ID ='.$sid);
+      while ($results = $results->fetchArray()) {
+         return $data=$results;
+      }
+  }
+  // ------------------get all schedules---------------
+  function get_all_schedules(){
+      $db = new SQLite3('bell.db');
+    	return $results = $db->query('SELECT * FROM SCHEDULE');
+  }
+  //------------update period except DOW----------------
+  function update_period($modifiedData,$value,$pid){
+    $db = new SQLite3('bell.db');
+    $results = $db->query('UPDATE PERIODS SET '.$modifiedData.'="'.$value.'" WHERE ID='.$pid);
+  }
+      //--------update period dow-----------
+  function update_dow($pid,$value){
+    $db = new SQLite3('bell.db');
+    $results = $db->query('UPDATE PERIODS SET DOW="'.$value.'" WHERE ID='.$pid);
+  }
+    //----------update scheule active---------
+  function update_active($sid,$value){
+      $db = new SQLite3('bell.db');
+      $results = $db->query('UPDATE SCHEDULE SET ACTIVE="'.$value.'" WHERE ID='.$sid);
+  }
+    //--------------update sound-------------
+  function update_sound($pid,$value){
+    $db = new SQLite3('bell.db');
+    $results = $db->query('UPDATE PERIODS SET SOUND="'.$value.'" WHERE ID='.$pid);
+  }
+    //------------delete periods--------------
+  function delete_period($pid){
+    $db = new SQLite3('bell.db');
+    $results = $db->query('DELETE FROM PERIODS WHERE ID='.$pid);
+  }
+  //-----------add period-----------------
+  function add_period($sid,$name){
+    $db = new SQLite3('bell.db');
+    $results = $db->query('INSERT INTO PERIODS (SCHEDULE_ID,NAME,START_DATE,END_DATE,DOW,SOUND) VALUES ('.$sid.',"'.$name.'","00:00","00:00","null","null")');
+  }
+  //--------------add schedule------------------
+  function add_schedule($name){
+    $db = new SQLite3('bell.db');
+    $db = new SQLite3('bell.db');
+    $results = $db->query('INSERT INTO SCHEDULE (NAME,ACTIVE) VALUES ("'.$name.'","false")');
+  }
 
+  //------------delete periods--------------
+function delete_schedule($sid){
+  $db = new SQLite3('bell.db');
+  $results = $db->query('DELETE FROM SCHEDULE WHERE ID='.$sid);
+  $results = $db->query('DELETE FROM PERIODS WHERE SCHEDULE_ID='.$sid);
+}
+//--------------update schedule-------------
+function update_schedule($sid,$name){
+$db = new SQLite3('bell.db');
+$results = $db->query('UPDATE SCHEDULE SET NAME="'.$name.'" WHERE ID='.$sid);
+}
+?>

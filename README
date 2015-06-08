@@ -14,5 +14,3 @@ Put files in an appropriate directory with appropriate permissions for web acces
 Make a copy of your system crontab in cron.stub and update directories as appropriate
 add the gencron.sh job run with appropriate permissions at an appropriate interval
 Be very mindful of security. Don't want arbitrary jobs getting pushed in with root access!
-
-Updated: June 2015

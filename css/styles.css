@@ -1,0 +1,64 @@
+body{
+	background-color: rgb(240,240,240);
+	font-family: sans-serif;
+	margin: 0 auto;
+}
+.hole{
+	width: 100%;
+	height: auto;
+}
+.time{
+	color: rgb(0,0,228);
+	height: 200px;
+	text-align: center;
+}
+.time h1{
+	font-size: 80px;
+}
+#audio{
+	text-align: center;
+}
+.table-hover tbody tr:hover,
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th{
+		background:#6f5499  !important;
+		/*color:#fff !important;*/
+}
+.tbladd{
+	float: right;
+	text-align: right;
+}
+.tbladd td,.tbladdschedule td{
+	padding: 5px;
+}
+
+/*td{
+	padding: 5px 25px 5px 5px;
+	border-left: solid black 1px;
+}
+tr{
+	font-size: small;
+}
+tr.c0{
+	background-color: rgb(250,250,250);
+}
+tr.c1{
+	background-color: rgb(255,255,255);
+}
+
+tr.h{
+	 font-weight: bold;
+	 border-bottom: solid black 2px;
+	 background-color: rgb(240,240,255);
+}
+
+table{
+	border-collapse: collapse;
+	border: solid black 1px;
+}*/
+.false{
+	color: rgb(220,220,220);
+}
+.true{
+	color: green;
+}
