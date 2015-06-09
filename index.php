@@ -115,7 +115,7 @@
             print("<span class=\"cbox\" id=\"$sid.ACTIVE\">".$schedule['NAME']."</span>");
             print("&nbsp; &nbsp;<span id=\"".$schedule['ID']."\" class='glyphicon glyphicon-pencil pen'></span> <a href=\"delete.php?sid=" . $schedule['ID'] ."&title=schedule\" onclick=\"return confirm('Are you sure you want to delete schedule?');\"><span class='glyphicon glyphicon-trash'></span></a>");
         print("</h1>");
-        print("<div id=\"edithide".$schedule['ID']."\" style=\"background:red; display:none;\">");
+        print("<div id=\"edithide".$schedule['ID']."\" style=\"padding:10px 0px 10px 0px; display:none;\">");
           print("<table class=\"tbladd\">");
             print("<tr>");
               print("<form action=\"addperiod_schedule.php\" method=\"POST\">");
@@ -169,10 +169,7 @@
         print("</tr>");
       print("</table>");
       print("</div>");
-
-
       }
-
       print("<div class=\"container\">");
         print("<table class=\"tbladdschedule\">");
           print("<tr id=\"hide\">");
@@ -190,11 +187,22 @@
       print("</div>");
   ?>
   </div>
-  <script>
+  <script type="text/javascript">
     function show() {
       document.getElementById("hide").style.display="block";
       document.getElementById("button").style.display="none";
     }
+    $(document).ready(function() {
+      $('.pen').click(function() {
+          var thisid =$(this).attr('id');
+          console.log("got a click!");
+          $('#edithide'+thisid).slideDown('slow');
+
+      });
+      $('#editpen').click(function() {
+                $('#edithide').slideDown('slow');
+          });
+    });
   </script>
 </body>
 </html>
