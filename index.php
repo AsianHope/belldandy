@@ -23,12 +23,10 @@
 
      });
      $('.edit_area').editable('save.php', {
-         type      : 'textarea',
-         submit    : 'OK',
-         indicator : '<img src="img/indicator.gif">',
-         tooltip   : 'Click to edit...',
-         cancel    : 'Cancel',
-
+       onblur:'submit',
+       tooltip   : 'Click to edit...',
+       width:200+'px',
+       height:30+'px',
      });
      $(".timepicker").editable("save.php", {
         indicator : "<img src='img/indicator.gif'>",
