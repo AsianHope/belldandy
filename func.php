@@ -102,7 +102,7 @@
 
 	foreach($possDOW as $thisDOW){
 	   foreach($curdow as $testdow){
-		   if(strcmp($testdow,$thisDOW)==0) $checked="green";
+		   if(strcmp($testdow,$thisDOW)==0) $checked="#FF9900";
 	   }
 
 	print("<div style=\"float:left;color:$checked\" class=\"cbox\" id=\"$id.DOW.$thisDOW\">".$thisDOW."&nbsp; </div>");
