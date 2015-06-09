@@ -24,10 +24,11 @@
      });
      $('.edit_area').editable('save.php', {
          type      : 'textarea',
-         cancel    : 'Cancel',
          submit    : 'OK',
          indicator : '<img src="img/indicator.gif">',
-         tooltip   : 'Click to edit...'
+         tooltip   : 'Click to edit...',
+         cancel    : 'Cancel',
+
      });
      $(".timepicker").editable("save.php", {
         indicator : "<img src='img/indicator.gif'>",
@@ -114,8 +115,19 @@
     print("<div class=\"container\">");
         print("<h1 class=\"".$schedule['ACTIVE']."\">");
             print("<span class=\"cbox\" id=\"$sid.ACTIVE\">".$schedule['NAME']."</span>");
-            print("&nbsp; &nbsp;<a href=\"delete.php?sid=" . $schedule['ID'] ."&title=schedule\" onclick=\"return confirm('Are you sure you want to delete schedule?');\"><span class='glyphicon glyphicon-trash'></span></a>");
+            print("&nbsp; &nbsp;<span id=\"".$schedule['ID']."\" class='glyphicon glyphicon-pencil pen'></span> <a href=\"delete.php?sid=" . $schedule['ID'] ."&title=schedule\" onclick=\"return confirm('Are you sure you want to delete schedule?');\"><span class='glyphicon glyphicon-trash'></span></a>");
         print("</h1>");
+        print("<div id=\"edithide".$schedule['ID']."\" style=\"background:red; display:none;\">");
+          print("<table class=\"tbladd\">");
+            print("<tr>");
+              print("<form action=\"addperiod_schedule.php\" method=\"POST\">");
+              print("<td>Schedule Name</td><td>:</td>");
+              print("<td><input type=\"text\" name=\"sname\" value=\"".$schedule['NAME']."\"/><input type=\"hidden\" name=\"sid\" value=\"".$schedule['ID']."\"></input></td>");
+              print("<td><button name=\"updateschedule\" type='submit' class='btn btn-warning'><span class=\"glyphicon glyphicon-pencil\"></span> &nbsp;Edit schedule</button></td>");
+              print("</form>");
+            print("</tr>");
+          print("</table>");
+        print("</div>");
         print("<table class=\"table table-striped table-bordered table-condensed table-hover\">");
         print("<thead>");
     	  print("<tr class=\"h\"><th><span class='glyphicon glyphicon-trash'></span></th><th>Period</th><th>Start</th><th>End</th><th>DoW</th><th>Sound</th></tr>");
@@ -126,7 +138,7 @@
         print("<tbody>");
        	print("<tr class=\"c$prepend\">");
           print("<td><a href=\"delete.php?pid=" . $period['ID'] ."&title=period\" onclick=\"return confirm('Are you sure you want to delete period?');\"><span class='glyphicon glyphicon-trash'></span></a></td>");
-         	print("<td><span class=\"edit_area\" id=\"$elementID.NAME\">".$period['NAME']."</span></td>");
+         	print("<td class=\"edit_area\" id=\"$elementID.NAME\">".$period['NAME']."</td>");
          	print("<td class=\"timepicker\"id=\"$elementID.START_DATE\">".$period['START_DATE']."</td>");
          	print("<td class=\"timepicker\" id=\"$elementID.END_DATE\">".$period['END_DATE']."</td>");
           print("<td>");
@@ -165,17 +177,26 @@
 
       print("<div class=\"container\">");
         print("<table class=\"tbladdschedule\">");
-          print("<tr>");
+          print("<tr id=\"hide\">");
             print("<form action=\"addperiod_schedule.php\" method=\"POST\">");
             print("<td>Schedule Name</td><td>:</td>");
             print("<td><input type=\"text\" name=\"schedule_name\" value=\"\"/></td>");
-            print("<td><button name=\"addschedule\" type='submit' class='btn btn-success'><span class=\"glyphicon glyphicon-plus\"></span> &nbsp;Add schedule</button></td>");
+            print("<td><button name=\"addschedule\" type='submit' class='btn btn-primary'>Save</button></td>");
             print("</form>");
           print("</tr>");
+          print("<tr>");
+            print("<td><button type='submit' id=\"button\" onclick=\"show()\" class='btn btn-success'><span class=\"glyphicon glyphicon-plus\"></span> &nbsp;Add schedule</button></td>");;
+          print("<tr>");
 
         print("</table>");
       print("</div>");
   ?>
   </div>
+  <script>
+    function show() {
+      document.getElementById("hide").style.display="block";
+      document.getElementById("button").style.display="none";
+    }
+  </script>
 </body>
 </html>
