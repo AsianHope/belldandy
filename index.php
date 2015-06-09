@@ -151,22 +151,17 @@
         print("</tbody>");
         print("</table>");
        	  $prepend = 0;
-      print("<table class=\"tbladd\">");
-        print("<tr>");
+      print("<table style=\"text-align:right; float:right;\" class=\"tbladd\">");
+        print("<tr style=\"display:none;\" class=\"hideaddperiod\" id=\"show".$schedule['ID']."\">");
           print("<form action=\"addperiod_schedule.php\" method=\"POST\">");
           print("<td>Period Name</td><td>:</td>");
           print("<td><input type=\"text\" name=\"period_name\" value=\"\"/><input type=\"hidden\" name=\"sid\" value=\"".$schedule['ID']."\"></input></td>");
-          print("<td><button name=\"addperiod\" type='submit' class='btn btn-success'><span class=\"glyphicon glyphicon-plus\"></span> &nbsp;Add period</button></td>");
+          print("<td><button name=\"addperiod\" type='submit' class='btn btn-primary'>Save</button></td>");
           print("</form>");
         print("</tr>");
-
         print("<tr>");
-          print("<form action=\"addperiod_schedule.php\" method=\"POST\">");
-          print("<td>Schedule Name</td><td>:</td>");
-          print("<td><input type=\"text\" name=\"sname\" value=\"".$schedule['NAME']."\"/><input type=\"hidden\" name=\"sid\" value=\"".$schedule['ID']."\"></input></td>");
-          print("<td><button name=\"updateschedule\" type='submit' class='btn btn-warning'><span class=\"glyphicon glyphicon-pencil\"></span> &nbsp;Edit schedule</button></td>");
-          print("</form>");
-        print("</tr>");
+          print("<td><button id=\"".$schedule['ID']."\" class='btn btn-success addperiod'><span class=\"glyphicon glyphicon-plus addperiod\"></span> &nbsp;Add period</button></td>");;
+        print("<tr>");
       print("</table>");
       print("</div>");
       }
@@ -192,16 +187,28 @@
       document.getElementById("hide").style.display="block";
       document.getElementById("button").style.display="none";
     }
+    function showPeriod(){
+      document.getElementById("hide").style.display="block";
+      document.getElementById("button").style.display="none";
+    }
     $(document).ready(function() {
       $('.pen').click(function() {
           var thisid =$(this).attr('id');
-          console.log("got a click!");
+          // console.log("got a click!");
           $('#edithide'+thisid).slideDown('slow');
 
       });
-      $('#editpen').click(function() {
-                $('#edithide').slideDown('slow');
-          });
+      // $('#editpen').click(function() {
+      //           $('#edithide').slideDown('slow');
+      //     });
+      $('.addperiod').click(function() {
+          var thisid =$(this).attr('id');
+          $(this).hide();
+          // console.log("got a click!");
+          $('#show'+thisid).slideDown('slow');
+          // alert(thisid);
+
+      });
     });
   </script>
 </body>
