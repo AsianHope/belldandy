@@ -9,11 +9,11 @@ body{
 }
 .time{
 	color: rgb(0,0,228);
-	height: 200px;
+	height: 650px;;
 	text-align: center;
 }
 .time h1{
-	font-size: 80px;
+	font-size: 340px;
 }
 #audio{
 	text-align: center;
@@ -25,8 +25,8 @@ body{
 		/*color:#fff !important;*/
 }
 .tbladd{
-	float: right;
-	text-align: right;
+	/*float: right;
+	text-align: right;*/
 }
 .tbladd td,.tbladdschedule td{
 	padding: 5px;
@@ -61,4 +61,11 @@ table{
 }
 .true{
 	color: green;
+}
+#hide{
+	display: none;
+}
+.edit_area{
+	width: 200px;
+	height: 30px;
 }
