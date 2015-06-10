@@ -22,9 +22,12 @@
 	   	if(strcmp($check,'true')==0){
 				//prevents double adding of days
 				if(strpos($duc['DOW'],$newdow)==false){
-				   $value = $duc['DOW'].",$newdow";
+					foreach($olddow as $testdow){
+					   $old.=$testdow.",";
+					}
+				   $value = $old."$newdow";
 				}
-				else $value = $duc['DOW'];
+				else $value = $old;
 				print("<div style=\"float:left; padding:0px 5px 0px 5px;\">$newdow</div>");
     	}
            //remove dow
@@ -32,9 +35,15 @@
 					$value="";
 					foreach($olddow as $testdow){
 					   if(strcmp($testdow,$newdow)==0){
-								$testdow='';
+								$old="";
 					   }
-					   $value.=$testdow.",";
+							else {
+								$old=$testdow;
+							}
+						if($old!=""){
+								$value.=$old.",";
+							}
+
 					}
 					print("<div style=\"float:left; padding:0px 5px 0px 5px;\">$newdow</div>");
         }

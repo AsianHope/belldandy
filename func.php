@@ -168,7 +168,7 @@
   //-----------add period-----------------
   function add_period($sid,$name){
     $db = new SQLite3('bell.db');
-    $results = $db->query('INSERT INTO PERIODS (SCHEDULE_ID,NAME,START_DATE,END_DATE,DOW,SOUND) VALUES ('.$sid.',"'.$name.'","00:00","00:00","","null")');
+    $results = $db->query('INSERT INTO PERIODS (SCHEDULE_ID,NAME,START_DATE,END_DATE,DOW,SOUND) VALUES ('.$sid.',"'.$name.'","00:00","00:00","","bell.mp3")');
   }
   //--------------add schedule------------------
   function add_schedule($name){
