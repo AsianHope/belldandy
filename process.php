@@ -22,7 +22,7 @@
 					$name = $period['NAME'];
 					$start = $period['START_DATE'];
 					$end = $period['END_DATE'];
-					$dow = rtrim($period['DOW'], ",");
+					$dow = trim($period['DOW'], ",");
 					$sound = $period['SOUND'];
 					$stime = explode(":",$start);
 					$etime = explode(":",$end);
@@ -34,9 +34,12 @@
 					$eminute = $etime[1];
 
 					//print out the actual cron statements, formatted nicely
-					fwrite($fh,"\n    #- $name -#\n");
-					fwrite($fh,"$sminute $shour * * $dow $user\t $command $source_dir$sound\n");
-					fwrite($fh,"$eminute $ehour * * $dow $user\t $command $source_dir$sound\n");
+					if($dow!=""){
+						fwrite($fh,"\n    #- $name -#\n");
+						fwrite($fh,"$sminute $shour * * $dow $user\t $command $source_dir$sound\n");
+						fwrite($fh,"$eminute $ehour * * $dow $user\t $command $source_dir$sound\n");
+					}
+
 
 				}
 		   	fwrite($fh,"\n");
