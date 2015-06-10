@@ -9,7 +9,7 @@ body{
 }
 .time{
 	color: rgb(0,0,228);
-	height: 650px;;
+	height: 750px;;
 	text-align: center;
 }
 .time h1{
@@ -31,7 +31,6 @@ body{
 .tbladd td,.tbladdschedule td{
 	padding: 5px;
 }
-
 /*td{
 	padding: 5px 25px 5px 5px;
 	border-left: solid black 1px;
@@ -57,7 +56,7 @@ table{
 	border: solid black 1px;
 }*/
 .false{
-	color: rgb(220,220,220);
+	color: rgb(220, 220,220);
 }
 .true{
 	color: green;
@@ -68,4 +67,10 @@ table{
 .edit_area{
 	width: 200px;
 	height: 30px;
+}
+.check{
+	color:#FF9900;
+}
+.uncheck{
+	color:rgb(220, 220,220);
 }

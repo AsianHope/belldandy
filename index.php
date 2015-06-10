@@ -43,12 +43,12 @@
         cancel    : 'Cancel',
         tooltip   : "Click to upload..."
     });
-    $(".cbox").editable("save.php", {
-        type      : 'checkbox',
-        submit    : 'OK',
-        cancel    : 'Cancel',
-	checkbox: { trueValue: 'true', falseValue: 'false'}
-    });
+  //   $(".cbox").editable("save.php", {
+  //       type      : 'checkbox',
+  //       submit    : 'OK',
+  //       cancel    : 'Cancel',
+	// checkbox: { trueValue: 'true', falseValue: 'false'}
+  //   });
  });
  </script>
  <script type="text/javascript">
@@ -111,8 +111,13 @@
     while ($schedule = $schedules->fetchArray()) {
     $sid =$schedule['ID'].".0";
     print("<div class=\"container\">");
-        print("<h1 class=\"".$schedule['ACTIVE']."\">");
-            print("<span class=\"cbox\" id=\"$sid.ACTIVE\">".$schedule['NAME']."</span>");
+        $true="false";
+        if($schedule['ACTIVE']=='true'){
+          $true="true";
+        }
+        print("<h1 class=\"\">");
+            print("<span class=\"cboxactive ".$true."\" id=\"$sid.ACTIVE\">".$schedule['NAME']."</span>");
+            $true="false";
             print("&nbsp; &nbsp;<span id=\"".$schedule['ID']."\" class='glyphicon glyphicon-pencil pen'></span> <a href=\"delete.php?sid=" . $schedule['ID'] ."&title=schedule\" onclick=\"return confirm('Are you sure you want to delete schedule?');\"><span class='glyphicon glyphicon-trash'></span></a>");
         print("</h1>");
         print("<div id=\"edithide".$schedule['ID']."\" style=\"padding:10px 0px 10px 0px; display:none;\">");
@@ -177,7 +182,6 @@
           print("<tr>");
             print("<td><button type='submit' id=\"button\" onclick=\"show()\" class='btn btn-success'><span class=\"glyphicon glyphicon-plus\"></span> &nbsp;Add schedule</button></td>");;
           print("<tr>");
-
         print("</table>");
       print("</div>");
   ?>
@@ -198,18 +202,73 @@
           $('#edithide'+thisid).slideDown('slow');
 
       });
-      // $('#editpen').click(function() {
-      //           $('#edithide').slideDown('slow');
-      //     });
       $('.addperiod').click(function() {
           var thisid =$(this).attr('id');
           $(this).hide();
-          // console.log("got a click!");
           $('#show'+thisid).slideDown('slow');
-          // alert(thisid);
 
       });
-    });
+      $('.cbox').click(function(e){
+          // $(this).toggleClass('check');
+          var elem = $(this)
+          if (elem.hasClass('check')) {
+              elem.removeClass('check').addClass("uncheck");
+          } else {
+              elem.removeClass().addClass("check" )
+          }
+          var e = $(this).css("color");
+       var id = $(this).attr("id");
+       var value = $(this).html();
+       var i = true;
+       if($(this).css("color")=='rgb(220, 220, 220)'){
+         i=false;
+       }
+       else{
+         i=true;
+       }
+       $.ajax({
+          url: "save.php", //This is the page where you will handle your SQL insert
+          type: "POST",
+          data: {'id': id, 'value': value,'i':i},
+          // data: "id=" + id +'&value='+value+'&i='+i, //The data your sending to some-page.php
+          success: function(){
+              console.log(e+i);
+          },
+          error:function(){
+              console.log("AJAX request was a failure");
+          }
+        });
+      });
+
+      $('.cboxactive').click(function(e){
+      var elem = $(this)
+      if (elem.hasClass('true')) {
+          elem.removeClass('true').addClass("false");
+      } else {
+          elem.removeClass().addClass("true" )
+      }
+       var id = $(this).attr("id");
+       var value = $(this).html();
+       var i = false;
+       if($(this).css("color")=='rgb(0, 128, 0)'){
+         i=true;
+       }
+       else{
+         i=false;
+       }
+       $.ajax({
+          url: "save.php",
+          type: "POST",
+          data: {'id': id,'value': value,'i':i},
+          success: function(){
+              console.log();
+          },
+          error:function(){
+              console.log("AJAX request was a failure");
+          }
+        });
+      });
+});
   </script>
 </body>
 </html>

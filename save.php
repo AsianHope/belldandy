@@ -3,7 +3,7 @@
 	include("func.php");
 	$id = $_POST['id'];
 	$value = $_POST['value'];
-
+	$check = $_POST['i'];
 	$data = explode(".",$id);
 	$sid = $data[0];
 	$pid = $data[1];
@@ -19,13 +19,13 @@
 	  $olddow=explode(",",$duc['DOW']);
 	  $possDOW=array("MON","TUE","WED","THU","FRI","SAT","SUN");
 			//insert dow
-	   	if(strcmp($value,'true')==0){
+	   	if(strcmp($check,'true')==0){
 				//prevents double adding of days
 				if(strpos($duc['DOW'],$newdow)==false){
 				   $value = $duc['DOW'].",$newdow";
 				}
 				else $value = $duc['DOW'];
-				print("<div style=\"float:left;color:green;\">$newdow&nbsp;</div>");
+				print("<div style=\"float:left; padding:0px 5px 0px 5px;\">$newdow</div>");
     	}
            //remove dow
 	   	else{
@@ -36,15 +36,15 @@
 					   }
 					   $value.=$testdow.",";
 					}
-					print("<div style=\"float:left;color:rgb(220,220,220);\">$newdow&nbsp;</div>");
+					print("<div style=\"float:left; padding:0px 5px 0px 5px;\">$newdow</div>");
         }
 					// updaate dow
 					update_dow($pid,$value);
 
 	}
 	elseif(strcmp($modifiedData,"ACTIVE")==0){
-		update_active($sid,$value);
-		print("<span class=\"$value\">".$suc['NAME']."</span>");
+		update_active($sid,$check);
+		print("<span class=\"$check\">".$suc['NAME']."</span>");
 		// print("<div class=\"$value\">".$suc['NAME']."</div>");
 	}
 	// update data beside Dow

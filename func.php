@@ -98,15 +98,18 @@
    function generateDOWSelect($name,$curdow,$id){
 	$possDOW=array("MON","TUE","WED","THU","FRI","SAT","SUN");
 	$curdow = explode(",",$curdow);
-	$checked="rgb(220,220,220);";
+	 $checked="uncheck";
 
 	foreach($possDOW as $thisDOW){
 	   foreach($curdow as $testdow){
-		   if(strcmp($testdow,$thisDOW)==0) $checked="#FF9900";
-	   }
+		   if(strcmp($testdow,$thisDOW)==0) //$checked="green";
+	      {
+            $checked="check";
+        }
+     }
 
-	print("<div style=\"float:left;color:$checked\" class=\"cbox\" id=\"$id.DOW.$thisDOW\">".$thisDOW."&nbsp; </div>");
-	$checked="rgb(220,220,220);";
+	print("<div style=\"float:left; padding:0px 5px 0px 5px;\" class=\"cbox ".$checked."\" id=\"$id.DOW.$thisDOW\">".$thisDOW." </div>");
+	$checked="uncheck";
 	}
 
   }
@@ -165,7 +168,7 @@
   //-----------add period-----------------
   function add_period($sid,$name){
     $db = new SQLite3('bell.db');
-    $results = $db->query('INSERT INTO PERIODS (SCHEDULE_ID,NAME,START_DATE,END_DATE,DOW,SOUND) VALUES ('.$sid.',"'.$name.'","00:00","00:00","null","null")');
+    $results = $db->query('INSERT INTO PERIODS (SCHEDULE_ID,NAME,START_DATE,END_DATE,DOW,SOUND) VALUES ('.$sid.',"'.$name.'","00:00","00:00","","null")');
   }
   //--------------add schedule------------------
   function add_schedule($name){
