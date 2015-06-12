@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
-
+<link href='http://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript">
  $(document).ready(function() {
@@ -58,26 +58,67 @@
          var hours = currentTime.getHours();
          var minutes = currentTime.getMinutes();
          var seconds = currentTime.getSeconds();
+        //  var day = currentTime.getDay();
+         var weekday = new Array(7);
+            weekday[0] = "SUNDAY";
+            weekday[1] = "MONDAY";
+            weekday[2] = "TUESDAY";
+            weekday[3] = "WEDNESDAY";
+            weekday[4] = "THURSDAY";
+            weekday[5] = "FRIDAY";
+            weekday[6] = "SATURDAY";
+            var d = new Date();
+          var months = new Array();
+          months[0] = "January";
+          months[1] = "February";
+          months[2] = "March";
+          months[3] = "April";
+          months[4] = "May";
+          months[5] = "June";
+          months[6] = "July";
+          months[7] = "August";
+          months[8] = "September";
+          months[9] = "October";
+          months[10] = "November";
+          months[11] = "December";
+        var month = months[currentTime.getMonth()];
+        var day = weekday[currentTime.getDay()];
+        var date = currentTime.getDate();
+        var year = currentTime.getFullYear();
          if (minutes < 10){
              minutes = "0" + minutes;
          }
          if (seconds < 10){
              seconds = "0" + seconds;
          }
-         var v = hours + ":" + minutes + ":" + seconds + " ";
+         var v = hours ;
          if(hours > 11){
              v+="";
          } else {
              v+=""
          }
 
- 	if(hours < 10){
- 	   hours = "0" + hours;
- 	}
+       	if(hours < 10){
+       	   hours = "0" + hours;
+       	}
+   var x;
+  if(date==1 || date == 21 || date == 31){
+    x="st";
+  }
+  if(date==2 || date == 22){
+    x="nd";
+  }
+  else{
+    x="th";
+  }
          setTimeout("updateTime()",1000);
-         document.getElementById('time').innerHTML=v;
- // 	document.getElementById('time').style.left=seconds+"px";
- // 	document.getElementById('time').style.top=minutes*5+"px";
+         document.getElementById('time').innerHTML=hours;
+         document.getElementById('minutes').innerHTML=minutes;
+         document.getElementById('day').innerHTML=day;
+         document.getElementById('date').innerHTML=date;
+         document.getElementById('month').innerHTML=month;
+         document.getElementById('year').innerHTML=year;
+         document.getElementById('x').innerHTML=x;
      }
      updateTime();
      //-->
@@ -85,8 +126,24 @@
  </head>
  <body>
    <div class="hole">
-    <div class="time"/>
-   	<h1><span id="time" style="position:relative;"/></h1>
+    <div class="time" id="changebg"/>
+      <div class="clock">
+        <div class="date">
+          <span id="day"></span>
+          <p><span id="month"></span>&nbsp; &nbsp;<span id="date"></span><span id="x"></span>&nbsp; &nbsp;<span id="year"></span></p>
+        </div>
+        <div class="clock_left">
+          <h1><span id="time" style=""/></h1>
+        </div>
+        <div class="divider"></div>
+        <div class="clock_right">
+          <h1><span id="minutes"/></h1>
+        </div>
+        <div class="sms">
+          <p id="message">International slap a pencake day in Sweden<p>
+        </div>
+
+      </div>
    </div>
    <p id="audio">
     <a href="bell.mp3">Listen &raquo;</a>
@@ -141,10 +198,11 @@
         print("<tbody>");
        	print("<tr class=\"c$prepend\">");
           print("<td><a href=\"delete.php?pid=" . $period['ID'] ."&title=period\" onclick=\"return confirm('Are you sure you want to delete period?');\"><span class='glyphicon glyphicon-trash'></span></a></td>");
-         	print("<td class=\"edit_area\" id=\"$elementID.NAME\">".$period['NAME']."</td>");
-         	print("<td class=\"timepicker\"id=\"$elementID.START_DATE\">".$period['START_DATE']."</td>");
-         	print("<td class=\"timepicker\" id=\"$elementID.END_DATE\">".$period['END_DATE']."</td>");
+         	print("<td class=\"edit_area period_name\" id=\"$elementID.NAME\">".$period['NAME']."</td>");
+         	print("<td class=\"timepicker start_date\"id=\"$elementID.START_DATE\">".$period['START_DATE']."</td>");
+         	print("<td class=\"timepicker end_date\" id=\"$elementID.END_DATE\">".$period['END_DATE']."</td>");
           print("<td>");
+          print("<div class=\"dow\" style=\"display:none;\">".trim($period['DOW'],',')."</div>");
                 generateDOWSelect($period['NAME'],$period['DOW'],$elementID);
                 print("</td>");
          		    print("<td class=\"ajaxupload\"id=\"$elementID.SOUND\">".$period['SOUND']."</td>");
@@ -152,7 +210,85 @@
 
        		$prepend++;
        		$prepend=$prepend%2;
+
+
+
        	}
+
+         echo "
+             <script type=\"text/javascript\">
+              function updatebgcolor() {
+                var weekday = new Array(7);
+                   weekday[0] = 'SUN';
+                   weekday[1] = 'MON';
+                   weekday[2] = 'TUE';
+                   weekday[3] = 'WED';
+                   weekday[4] = 'THU';
+                   weekday[5] = 'FRI';
+                   weekday[6] = 'SAT';
+                var start_date= document.getElementsByClassName('start_date');
+                var end_date= document.getElementsByClassName('end_date');
+                var dow= document.getElementsByClassName('dow');
+                var period_name= document.getElementsByClassName('period_name');
+                var currentTime = new Date();
+                var chours = currentTime.getHours();
+                var cminute = currentTime.getMinutes();
+                var cday = weekday[currentTime.getDay()];
+
+                for (var i = 0; i < start_date.length; i++) {
+                  var start_dates = start_date[i].innerHTML.split(':');
+                  var end_dates = end_date[i].innerHTML.split(':');
+                  var start_h = start_dates[0];
+                  var start_m = start_dates[1];
+                  var end_h = end_dates[0];
+                  var end_m = end_dates[1];
+                  var dows = dow[i].innerHTML;
+                  var pname =period_name[i].innerHTML.toLowerCase();
+                  var bgcolor='#00BFFF';
+                  if(pname=='pink'){
+                    bgcolor='#FF69B4';
+                  }
+                  else if(pname=='purple'){
+                    bgcolor='#800080';
+                  }
+                  else if(pname=='gray'){
+                    bgcolor='#A9A9A9';
+                  }
+                  else if(pname=='blue'){
+                    bgcolor='#00BFFF';
+                  }
+                  else if(pname=='red'){
+                    bgcolor='#FF0000';
+                  }
+                  else if(pname=='green'){
+                    bgcolor='#00FF00';
+                  }
+                  else if(pname=='orange'){
+                    bgcolor='#FF8C00';
+                  }
+                  else if(pname=='yellow'){
+                    bgcolor='#FFFF00';
+                  }
+                  else if(pname=='black'){
+                    bgcolor='#000000';
+                  }
+                  else if(pname=='brown'){
+                    bgcolor='#8B4513';
+                  }
+                  if(chours>=start_h && chours<=end_h && cminute>=start_m && cminute<=end_m && dows.indexOf(cday) >= 0){
+                    document.getElementById('changebg').style.backgroundColor =bgcolor;
+                  }
+                    console.log(chours);
+
+
+                }
+              }
+              setInterval(function(){updatebgcolor()},1000);
+
+             </script>
+         ";
+
+
         print("</tbody>");
         print("</table>");
        	  $prepend = 0;
@@ -163,6 +299,7 @@
           print("<td><input type=\"text\" name=\"period_name\" value=\"\"/><input type=\"hidden\" name=\"sid\" value=\"".$schedule['ID']."\"></input></td>");
           print("<td><button name=\"addperiod\" type='submit' class='btn btn-primary'>Save</button></td>");
           print("</form>");
+
         print("</tr>");
         print("<tr>");
           print("<td><button id=\"".$schedule['ID']."\" class='btn btn-success addperiod'><span class=\"glyphicon glyphicon-plus addperiod\"></span> &nbsp;Add period</button></td>");;
