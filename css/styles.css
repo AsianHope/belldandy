@@ -9,7 +9,7 @@ body{
 }
 .time{
 	color: rgb(0,0,228);
-	height: 800px;;
+	height: 850px;;
 	text-align: center;
 	background:#00BFFF;
 }
@@ -53,78 +53,82 @@ body{
 	color:rgb(220, 220,220);
 }
 .clock{
-	width: 600px;
-	margin: 0 auto;
-	height: 600px;
-	background:#00BFFFf;
-	border-radius: 50%;
-	border: 15px solid white;
-	position: relative;
-	color: #ffffff;
-	position: absolute;
-	margin-top: 100px;
-	margin-left: 30%;
-	font-family: 'Lato', sans-serif;
+	width: 700px;
+	  margin: 0 auto;
+	  height: 700px;
+	  background: #00BFFFf;
+	  border-radius: 50%;
+	  border: 15px solid white;
+	  position: relative;
+	  color: #ffffff;
+	  position: absolute;
+	  margin-top: 50px;
+	  margin-left: 25%;
+	  font-family: 'Lato', sans-serif;
 }
 
 .clock #time, .clock #minutes{
 	font-weight: 900;
 }
-.clock #day,.clock #month,.clock #date ,.clock #year,.clock #message{
+.clock #month,.clock #date ,.clock #year,.clock #message{
 	font-weight: 400;
 }
 .clock_left{
 	float: left;
-	margin-left: 30px;
-	width: 240px;
-	position: absolute;
-	margin-top: 140px;
-	margin-left: 42px;
-	font-weight: 900px;
+	  margin-left: 30px;
+	  width: 240px;
+	  position: absolute;
+	  margin-top: 194px;
+	  margin-left: 87px;
+	  font-weight: 900px;
 }
 .clock_right{
 	text-align: left;
-  width: 240px;
-  position: absolute;
-	margin-top: 140px;
-  margin-left: 293px;
-  font-weight: 900px;
+	width: 240px;
+	position: absolute;
+	margin-top: 194px;
+	margin-left: 346px;
+	font-weight: 900px;
 }
 .divider{
 	width: 8px;
-	height: 461px;
-	background: white;
-	position: absolute;
-	margin-top: 55px;
-	margin-left: 282px;
+  height: 461px;
+  background: white;
+  position: absolute;
+  margin-top: 113px;
+  margin-left: 330px;
 }
 .sms{
 	position: relative;
   width: 240px;
   height: 65px;
-	margin-left: 298px;
-	margin-top: 376px;
+  margin-left: 347px;
+  margin-top: 424px;
   text-align: left;
-	font-weight: 400;
+  font-weight: 400;
 }
 .date{
 	text-align: right;
-	margin-left: 30px;
-	width: 240px;
-	height: 65px;
-	margin-top: 60px;
-	position: absolute;
-	font-weight: 400;
+  margin-left: 26px;
+  width: 290px;
+  height: 105px;
+	margin-top: 145px;
+  position: absolute;
 }
-.date p {
-	margin-top: -15px;
+.date p{
+	font-weight: 400;
+	margin-top: -12px;
 }
 #day{
-	font-size: 50px;
+	font-size: 42px;
+	font-weight: 900;
 }
 #month,#date,#year,.sms{
 	font-size: 30px;
 }
 #x{
 	font-size: 25px;
+}
+#message{
+	line-height: 33px;
 }

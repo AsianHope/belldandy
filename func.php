@@ -1,18 +1,18 @@
 <?php
-   function myHeader(){
-      print("
-	<html>
-	<head>
-	   <title>Belldandy - the Logos bell system!</title>
-	   <link rel = \"stylesheet\" type=\"text/css\" href=\"styles.css\"/>
-	</head>
-	<body>");
-   }
+function myHeader(){
+  print("
+<html>
+<head>
+ <title>Belldandy - the Logos bell system!</title>
+ <link rel = \"stylesheet\" type=\"text/css\" href=\"css\styles.css\"/>
+</head>
+<body>");
+}
 
-   function myFooter(){
-      print("</body>
-      </html>");
-   } //end footer()
+function myFooter(){
+  print("</body>
+  </html>");
+} //end footer()
 
    function showBells(){
         $schedules=simplexml_load_file('bells.xml');
