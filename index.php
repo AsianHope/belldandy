@@ -91,15 +91,15 @@
          if (seconds < 10){
              seconds = "0" + seconds;
          }
-         var v = hours ;
+        //  var v = hours ;
          if(hours > 11){
-             v+="";
+           hours+="";
          } else {
-             v+=""
+           hours+=""
          }
 
        	if(hours < 10){
-       	   hours = "0" + hours;
+           hours= "0" + hours;
        	}
    var x;
   if(date==1 || date == 21 || date == 31){
@@ -133,7 +133,7 @@
           <p><span id="month"></span>&nbsp; &nbsp;<span id="date"></span><span id="x"></span>&nbsp; &nbsp;<span id="year"></span></p>
         </div>
         <div class="clock_left">
-          <h1><span id="time" style=""/></h1>
+          <h1><span id="time"/></h1>
         </div>
         <div class="divider"></div>
         <div class="clock_right">
