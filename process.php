@@ -6,7 +6,7 @@
         //user to run the command as
 	$user = "root";
         //installation directory (where to find bells.xml)
-	$source_dir = "./";
+	$source_dir = "/var/www/belldandy/";
         //read all of the schedules
 	$schedules = $db->query('SELECT * FROM SCHEDULE');
   //where to store the temporary cron formatted stub file we generate
